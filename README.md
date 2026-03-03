@@ -70,7 +70,7 @@ Le fichier `batiments.json` a la structure suivante :
 ```
 
 Chaque bâtiment contient :
-- `name` : *string* - Nom affiché dans le menu
+- `name` : *string* - Nom
 - `description` : *string* - Description courte de la structure
 - `edges` : *list* - Liste des arêtes [nœud1, nœud2]
 

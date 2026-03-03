@@ -119,13 +119,10 @@ def creer_pos_pour_edges(edges):
     """
     import networkx as nx
     
-    # Créer un graphe vide
     G = nx.Graph()
     
-    # Ajouter les arêtes (les nœuds sont créés automatiquement)
     G.add_edges_from(edges)
     
-    # Calculer les positions
     pos = nx.spring_layout(G, seed=3113794652)
     
     return pos
@@ -147,11 +144,10 @@ def continuer():
         case 1:
             return True
         case 2:
-            #Affiche intersectionCrit
             return False
 
 
-# Import du json des batiments
+# Import du json des batiments ----------------------------------------------------
 
 building_index = choixBatiment()
 with open('batiments.json', 'r') as f:
@@ -161,6 +157,9 @@ with open('batiments.json', 'r') as f:
 edges = data['buildings'][building_index]['edges']
 
 nodes = set([n for edge in edges for n in edge])
+
+nom_bat = data['buildings'][building_index]['name']
+desc_bat = data['buildings'][building_index]['description']
 
 G =gv.Graph('G', engine='neato')
 
@@ -173,8 +172,7 @@ for u, v in edges:
 Gnx = nx.Graph()
 Gnx.add_edges_from(edges)
 
-
-# partie Projet -------------------------
+# Initialisation ------------------------------
 
 intersectionsCritiques = []
 couloirsVitales = []
@@ -183,9 +181,6 @@ diametre = nx.diameter(Gnx)
 ensemblesDomi = []
 ZUC = []
 Densite = 0
-    
-# Initialisation ------------------------------
-
 
     # Intersections "Critiques"
 
@@ -276,10 +271,19 @@ def afficheZuc():
     nx.draw_networkx_nodes(Gnx, pos=pos, nodelist=suppDeList(nodes, lst), node_color="tab:gray", **options)
     affiche()
 
+def afficheGraph():
+    nx.draw_networkx_edges(Gnx, pos=pos, edgelist=edges, width=3, alpha=1)
+    
+    nx.draw_networkx_nodes(Gnx, pos=pos, nodelist=nodes, node_color="tab:gray", **options)
+    affiche()
+
 def afficheInfo():
     print(
     "\n --------------------------------- Information sur le Graph ---------------------------------",
     "\n  ||                              ~~~~~~~~~~~~~~~~~~~~~~~~~~",
+    "\n  || - Nom : ",  nom_bat, \
+    "\n  || - Description : ", desc_bat ,
+    "\n  || ",
     "\n  || - Intersection Critiques : ", intersectionsCritiques,
     "\n  || - Couloirs Vitaux : ", couloirsVitales,
     "\n  || - Est Connexe : ", connexe,
@@ -296,6 +300,7 @@ def start():
     Running = True
     while Running:
         print("\n Que Voulez-vous afficher ? :" \
+        "\n [0] - Afficher le Batiment" \
         "\n [1] - Information sur le graph" \
         "\n [2] - Intersections Critiques" \
         "\n [3] - Emplacement optimisée des caméra" \
@@ -306,6 +311,9 @@ def start():
         response = input()
 
         match int(response):
+            case 0:
+                afficheGraph()
+                Running = continuer()
             case 1:
                 afficheInfo()
                 Running = continuer()
