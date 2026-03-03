@@ -9,6 +9,74 @@ Ce projet analyse la structure d'un bâtiment modélisée sous forme de **graphe
 L'objectif est d'analyser différentes propriétés du bâtiment pour des questions de sécurité, surveillance et accessibilité.
 
 ---
+## Utilisation du fichier JSON des bâtiments
+
+### Charger un bâtiment depuis le JSON
+
+Le fichier `batiments.json` contient **10 bâtiments prédéfinis** avec des structures différentes. Un menu interactif permet de choisir le bâtiment à analyser.
+
+### Fonction de sélection des bâtiments
+
+```python
+def choixBatiment():
+```
+
+### Charger les données du JSON
+
+```python
+# Afficher le menu et récupérer le choix
+building_index = choixBatiment()
+
+# Charger le fichier JSON
+with open('batiments.json', 'r') as f:
+    data = json.load(f)
+
+# Récupérer les arêtes du bâtiment choisi
+if building_index is not None:
+    edges = data['buildings'][building_index]['edges']
+```
+
+### Liste des bâtiments disponibles
+
+| Choix | Nom | Description |
+|-------|-----|-------------|
+| 1 | Bâtiment Principal | Bâtiment complexe avec plusieurs ailes |
+| 2 | Petit Bâtiment | Bâtiment simple et connexe |
+| 3 | Bâtiment Linéaire | Structure linéaire simple (couloir principal) |
+| 4 | Bâtiment avec Étages | Deux étages connectés par escaliers |
+| 5 | Bâtiment Étoile | Structure centralisée (hall central avec 4 ailes) |
+| 6 | Bâtiment Grille | Grille 3x3 d'intersections |
+| 7 | Bâtiment Complexe | Structure très interconnectée avec plusieurs boucles |
+| 8 | Bâtiment Carré | Carré simple avec diagonales |
+| 9 | Bâtiment Disconnecté | Deux zones indépendantes (test de connexité) |
+| 10 | Bâtiment Arbre | Structure en arbre sans cycles |
+| 11 | Retour | Revenir au menu précédent |
+
+### Format du fichier JSON
+
+Le fichier `batiments.json` a la structure suivante :
+
+```json
+{
+  "buildings": [
+    {
+      "name": "Nom du bâtiment",
+      "description": "Description du bâtiment",
+      "edges": [[1, 2], [2, 3], ...]
+    },
+    ...
+  ]
+}
+```
+
+Chaque bâtiment contient :
+- `name` : *string* - Nom affiché dans le menu
+- `description` : *string* - Description courte de la structure
+- `edges` : *list* - Liste des arêtes [nœud1, nœud2]
+
+Cela permet de tester l'algorithme sur différentes structures de bâtiments !
+
+---
 
 ## Fonctionnalités principales
 

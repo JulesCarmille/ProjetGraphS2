@@ -1,53 +1,52 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import graphviz as gv
-
-# Plan du batiment
-edges = [
-    (1,2), (2,3), (3,4),
-    (4,5), (5,6), (6,7), (7,8), (8,4),
-    (5,7), (6,8),
-    (2,9), (9,10), (10,11), (11,12),
-    (10,13), (13,14),
-    (12,15), (15,16), (16,12),
-    (8,17),
-    (17,18), (18,19), (19,20),
-    (18,21), (21,22), (22,23),
-    (19,22),
-    (23,24), (24,25), (25,26), (26,23),
-    (24,26),
-    (20,27), (27,28), (28,29),
-    (29,30), (30,31), (31,29),
-    (7,32),
-    (25,33),
-    (28,34),
-]
-
-G =gv.Graph('G', engine='neato')
-
-nodes = set([n for edge in edges for n in edge])
-
-for node in nodes:
-    G.node(str(node), shape='square', color='gray')
-
-for u, v in edges:
-    G.edge(str(u), str(v))
-
-Gnx = nx.Graph()
-Gnx.add_edges_from(edges)
-
-
-# partie Projet -------------------------
-
-intersectionsCritiques = []
-couloirsVitales = []
-connexe = nx.is_connected(Gnx)
-diametre = nx.diameter(Gnx)
-ensemblesDomi = []
-ZUC = []
-Densite = 0
+import json
 
 # Fonctions -----------------------------------
+    # Choisir le batiment
+def choixBatiment():
+    print("\n Quel bâtiment voulez-vous tester ? :" \
+    "\n [1] - Bâtiment Principal" \
+    "\n [2] - Petit Bâtiment" \
+    "\n [3] - Bâtiment Linéaire" \
+    "\n [4] - Bâtiment avec Étages" \
+    "\n [5] - Bâtiment Étoile" \
+    "\n [6] - Bâtiment Grille" \
+    "\n [7] - Bâtiment Complexe" \
+    "\n [8] - Bâtiment Carré" \
+    "\n [9] - Bâtiment Disconnecté" \
+    "\n [10] - Bâtiment Arbre" \
+    "\n [11] - Retour")
+
+    response = input()
+
+    match int(response):
+        case 1:
+            return 0
+        case 2:
+            return 1
+        case 3:
+            return 2
+        case 4:
+            return 3
+        case 5:
+            return 4
+        case 6:
+            return 5
+        case 7:
+            return 6
+        case 8:
+            return 7
+        case 9:
+            return 8
+        case 10:
+            return 9
+        case 11:
+            return None
+        case _:
+            print("Mauvaise valeur entrée")
+            return choixBatiment()
 
 
     # Intersections "Critiques"
@@ -150,6 +149,40 @@ def continuer():
         case 2:
             #Affiche intersectionCrit
             return False
+
+
+# Import du json des batiments
+
+building_index = choixBatiment()
+with open('batiments.json', 'r') as f:
+    data = json.load(f)
+
+    # Charger le bâtiment principal
+edges = data['buildings'][building_index]['edges']
+
+nodes = set([n for edge in edges for n in edge])
+
+G =gv.Graph('G', engine='neato')
+
+for node in nodes:
+    G.node(str(node), shape='square', color='gray')
+
+for u, v in edges:
+    G.edge(str(u), str(v))
+
+Gnx = nx.Graph()
+Gnx.add_edges_from(edges)
+
+
+# partie Projet -------------------------
+
+intersectionsCritiques = []
+couloirsVitales = []
+connexe = nx.is_connected(Gnx)
+diametre = nx.diameter(Gnx)
+ensemblesDomi = []
+ZUC = []
+Densite = 0
     
 # Initialisation ------------------------------
 
