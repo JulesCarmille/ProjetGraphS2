@@ -1,4 +1,4 @@
-# Analyse de Graphe de Bâtiment 🏢
+# Analyse de Graphe de Bâtiment
 
 ## Description
 
@@ -12,17 +12,17 @@ L'objectif est d'analyser différentes propriétés du bâtiment pour des questi
 
 ## Fonctionnalités principales
 
-### 1. **Intersections Critiques** 🔴
+### 1. **Intersections Critiques**
 Identifie les nœuds **"points d'articulation"** du bâtiment. Si une intersection critique est fermée, le bâtiment se divise en plusieurs zones isolées.
 
 **Utilité :** Déterminer les zones stratégiques pour les pompiers, évacuations, ou maintenance.
 
-### 2. **Couloirs Vitaux** 🚪
+### 2. **Couloirs Vitaux**
 Détecte les arêtes **"isthmes"** du bâtiment. Si un couloir vital est bloqué, le bâtiment se divise en plusieurs zones isolées.
 
 **Utilité :** Identifier les passages critiques pour la circulation.
 
-### 3. **Emplacement optimisé des caméras** 📹
+### 3. **Emplacement optimisé des caméras**
 Calcule un **ensemble dominant minimal** : le nombre minimum de caméras nécessaires pour surveiller tout le bâtiment.
 
 Une caméra surveillée à une intersection voit :
@@ -31,14 +31,15 @@ Une caméra surveillée à une intersection voit :
 
 **Utilité :** Optimiser le coût des caméras de surveillance.
 
-### 4. **Zones à fort affluence (ZUC)** 🔥
+### 4. **Zones à fort affluence (ZUC)** 
 Trouve toutes les **cliques maximales** du graphe : les groupes d'intersections entièrement interconnectées.
+(*Lors de l'affichage, les noeud qui paraissent font partie de la Zuc il y en a simplemnent plusieur au même endroit*)
 
 Ces zones représentent des lieux **très densément connectés** où beaucoup de gens circulent.
 
 **Utilité :** Planifier la signalétique, l'éclairage, la sécurité.
 
-### 5. **Propriétés globales du bâtiment** 📊
+### 5. **Propriétés globales du bâtiment** 
 Affiche des informations générales :
 - **Connexité** : Le bâtiment est-il entièrement connecté ?
 - **Diamètre** : Distance maximale entre deux intersections
@@ -53,8 +54,7 @@ Affiche des informations générales :
 ```python
 edges          # Liste des arêtes (couloirs)
 nodes          # Ensemble des nœuds (intersections)
-Gnx            # Graphe NetworkX
-pos            # Positions pour la visualisation
+Gnx            # Graphe NetworkX (batiment)
 ```
 
 ### Fonctions utilitaires
@@ -137,19 +137,9 @@ Les graphiques utilisent un code couleur :
 
 ---
 
-## Améliorations possibles
-
-- [ ] Ajouter des poids aux arêtes (distance en mètres)
-- [ ] Calculer les itinéraires optimaux
-- [ ] Gérer les étages du bâtiment
-- [ ] Interface graphique améliorée
-- [ ] Export des résultats en fichier
-
----
-
 ## Auteur
 
-Projet de analyse de graphe - BUT Informatique S2
+Jules Carmille - BUT Informatique S2 - IUT Belfort
 
 ---
 
