@@ -101,7 +101,7 @@ Une caméra surveillée à une intersection voit :
 
 ### 4. **Zones à fort affluence (ZUC)** 
 Trouve toutes les **cliques maximales** du graphe : les groupes d'intersections entièrement interconnectées.
-(*Lors de l'affichage, les noeud qui paraissent font partie de la Zuc il y en a simplemnent plusieur au même endroit*)
+(*Lors de l'affichage, les noeud qui paraissent seuls font partie de la Zuc il y en a simplemnent plusieur au même endroit (elle se superpose) *)
 
 Ces zones représentent des lieux **très densément connectés** où beaucoup de gens circulent.
 
